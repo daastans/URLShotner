@@ -1,6 +1,7 @@
 import http.server
 import requests
 from urllib.parse  import parse_qs,unquote
+import os
 
 memory={}
 form = '''<!DOCTYPE html>
@@ -82,7 +83,8 @@ class Shortner(http.server.BaseHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-    server_address = ('', 8009)
+    port=int(os.environ.get('PORT',800))
+    server_address = ('', port)
     httpd = http.server.HTTPServer(server_address, Shortner)
     httpd.serve_forever()
 
