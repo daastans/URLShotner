@@ -3,7 +3,7 @@ import requests
 from urllib.parse  import parse_qs,unquote
 import os
 import threading
-from sockeserver import ThreadMixIn
+from socketserver import ThreadingMixIn
 
 memory={}
 form = '''<!DOCTYPE html>
@@ -84,7 +84,8 @@ class Shortner(http.server.BaseHTTPRequestHandler):
 
 
 if __name__ == '__main__':
-    port=int(os.environ.get('PORT',800))
+    port=int(os.environ.get('PORT',8000))
+    print(port)
     server_address = ('', port)
     httpd = ThreadHTTPServer(server_address, Shortner)
     httpd.serve_forever()
