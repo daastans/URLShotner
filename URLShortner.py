@@ -5,7 +5,7 @@ import os
 
 memory={}
 form = '''<!DOCTYPE html>
-<title>Bookmark Server</title>
+<title>Aman's URL Shortner</title>
 <form method="POST">
     <label>Long URI:
         <input name="longuri">
