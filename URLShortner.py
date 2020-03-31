@@ -2,6 +2,8 @@ import http.server
 import requests
 from urllib.parse  import parse_qs,unquote
 import os
+import threading
+from sockeserver import ThreadMixIn
 
 memory={}
 form = '''<!DOCTYPE html>
@@ -36,6 +38,7 @@ def CheckURI(uri, timeout=5):
     except requests.RequestException:
         # If the GET request raised an exception, it's not OK.
         return False
+class ThreadHTTPServer(ThreadingMixIn, http.server.HTTPServer):
 
 class Shortner(http.server.BaseHTTPRequestHandler):
 
@@ -85,7 +88,7 @@ class Shortner(http.server.BaseHTTPRequestHandler):
 if __name__ == '__main__':
     port=int(os.environ.get('PORT',800))
     server_address = ('', port)
-    httpd = http.server.HTTPServer(server_address, Shortner)
+    httpd = ThreadHTTPServer(server_address, Shortner)
     httpd.serve_forever()
 
 
